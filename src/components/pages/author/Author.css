@@ -1,8 +1,13 @@
 .author-content{
-    position: relative; 
-    background: orange;
+    position: relative;
     width: 100px;
     height: 100px;
     top: 100px;
     left: 250px; 
+}
+.card li{
+    width: 300px;
+    border: 5px solid gray;
+    padding: 50px;
+    margin: 20px;
 }

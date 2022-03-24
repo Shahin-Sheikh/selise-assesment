@@ -1,28 +1,82 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import Card from 'react-bootstrap/Card';
+import ReactPaginate from 'react-paginate';
+import Posts from '../../Posts';
+import Pagination from '../../Pagination';
 import './Author.css';
 function Author() {
+	/* const [author, setAuthor] = useState([]);
+	useEffect(() => {
+		axios
+			.get('https://api.quotable.io/authors?limit=10&skip=20')
+			.then((res) => {
+				setAuthor(res.data.results);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 	return (
-		<div className="author-content">
-			<div className="title">
-				<h1>Author</h1>
+		<>
+			<div className="fav-content">
+				<ul className="card">
+					{author.map((item, index) => {
+						return (
+							<li key={index}>
+								<Card style={{ width: '18rem' }}>
+									<button>Add Favt</button>
+									<Card.Body>
+										<Card.Title>Name: {item.name}</Card.Title>
+										<Card.Text>Bio: {item.bio}</Card.Text>
+									</Card.Body>
+								</Card>
+							</li>
+						);
+					})}
+				</ul>
 			</div>
-			<div className="author-info">
-				<div className="author-img">
-					<img
-						src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-						alt="author"
+		</>
+	); */
+	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage] = useState(3);
+
+	useEffect(() => {
+		const fetchPosts = async () => {
+			setLoading(true);
+			const res = await axios.get(
+				'https://api.quotable.io/authors?limit=10&skip=20'
+			);
+			setPosts(res.data.results);
+			setLoading(false);
+		};
+
+		fetchPosts();
+	}, []);
+
+	// Get current posts
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+	// Change page
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	return (
+		<>
+			<div className="fav-content">
+				<div className="container mt-5">
+					<Posts posts={currentPosts} loading={loading} />
+					<Pagination
+						postsPerPage={postsPerPage}
+						totalPosts={posts.length}
+						paginate={paginate}
 					/>
 				</div>
-				<div className="author-info-text">
-					<h2>Author Name</h2>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Pellentesque\ euismod, urna eu tincidunt consectetur, nisi nisl
-						aliquam eros, eget\
-					</p>
-				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
