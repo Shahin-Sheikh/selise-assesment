@@ -2,15 +2,24 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const Posts = ({ posts, loading }) => {
+	const [row, setRows] = useState([
+		{
+			id: '',
+			name: '',
+			bio: '',
+			link: '',
+		},
+	]);
 	const click = (id, name, bio, link) => {
-		//setButtonText(text);
 		const obj = {
 			id: id,
 			name: name,
 			bio: bio,
 			link: link,
 		};
-		localStorage.setItem('items', JSON.stringify({ ...obj }));
+		const newRow = [...row, obj];
+		setRows(newRow);
+		localStorage.setItem('items', JSON.stringify({ newRow }));
 	};
 
 	if (loading) {

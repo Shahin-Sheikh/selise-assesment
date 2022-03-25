@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Pagination.css';
 import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
 
@@ -15,13 +15,16 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 				<GrCaretPrevious />
 				Page:
 				{pageNumbers.map((number) => (
-					<li key={number} style={{ display: 'inline-block' }}>
+					<li
+						key={number}
+						style={{ display: 'inline-block', textDecoration: 'none' }}
+					>
 						<a onClick={() => paginate(number)} href="#" className="page-link">
 							{number}
 						</a>
 					</li>
 				))}
-				<GrCaretNext />
+				{<GrCaretNext />}
 			</ul>
 		</div>
 	);

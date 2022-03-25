@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Posts from '../../Posts';
-
 import Pagination from '../../pagination/Pagination';
-
 import './Author.css';
+
 function Author() {
 	const [posts, setPosts] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -24,12 +23,10 @@ function Author() {
 		fetchPosts();
 	}, []);
 
-	// Get current posts
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-	// Change page
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	return (

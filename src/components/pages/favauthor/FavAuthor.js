@@ -4,31 +4,33 @@ import Card from 'react-bootstrap/Card';
 function FavAuthor() {
 	const [data, setItems] = useState([]);
 	useEffect(() => {
-		const localStorageItems = JSON.parse(localStorage.getItem('items'));
+		var localStorageItems = JSON.parse(localStorage.getItem('items'));
 		console.log(localStorageItems);
+		localStorageItems.newRow.shift();
 		if (localStorageItems) {
-			setItems(localStorageItems);
+			setItems(localStorageItems.newRow);
 		} else {
 			setItems([]);
 		}
 	}, []);
-	useEffect(() => {
-		localStorage.setItem('items', JSON.stringify(data));
-	}, [data]);
 
 	return (
 		<>
 			<div className="fav-content">
 				<ul className="card">
-					<li key={data.id}>
-						<Card style={{ width: '18rem' }}>
-							<Card.Body>
-								<Card.Title>Name: {data.name}</Card.Title>
-								<Card.Text>Bio: {data.bio}</Card.Text>
-								<Card.Text>Link: {data.link}</Card.Text>
-							</Card.Body>
-						</Card>
-					</li>
+					{data.map((item, index) => {
+						return (
+							<li key={item.id}>
+								<Card style={{ width: '18rem' }}>
+									<Card.Body>
+										<Card.Title>Name: {item.name}</Card.Title>
+										<Card.Text>Bio: {item.bio}</Card.Text>
+										<Card.Text>Link: {item.link}</Card.Text>
+									</Card.Body>
+								</Card>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 		</>
