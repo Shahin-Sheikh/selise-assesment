@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './FavAuthor.css';
 import Card from 'react-bootstrap/Card';
-import Posts from '../../Posts';
 function FavAuthor() {
 	const [data, setItems] = useState([]);
-
 	useEffect(() => {
 		const localStorageItems = JSON.parse(localStorage.getItem('items'));
 		console.log(localStorageItems);
 		if (localStorageItems) {
 			setItems(localStorageItems);
+		} else {
+			setItems([]);
 		}
 	}, []);
+	useEffect(() => {
+		localStorage.setItem('items', JSON.stringify(data));
+	}, [data]);
+
 	return (
 		<>
 			<div className="fav-content">

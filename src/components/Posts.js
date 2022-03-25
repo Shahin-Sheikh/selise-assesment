@@ -2,14 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 
 const Posts = ({ posts, loading }) => {
-	const [item, setItem] = useState([
-		{
-			id: '',
-			name: '',
-			bio: '',
-			link: '',
-		},
-	]);
 	const click = (id, name, bio, link) => {
 		//setButtonText(text);
 		const obj = {
