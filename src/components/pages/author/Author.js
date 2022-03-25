@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ReactPaginate from 'react-paginate';
 import Posts from '../../Posts';
-import Pagination from '../../Pagination';
+import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
+
+import Pagination from '../../pagination/Pagination';
+
 import './Author.css';
 function Author() {
 	/* const [author, setAuthor] = useState([]);
@@ -65,18 +68,15 @@ function Author() {
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	return (
-		<>
-			<div className="fav-content">
-				<div className="container mt-5">
-					<Posts posts={currentPosts} loading={loading} />
-					<Pagination
-						postsPerPage={postsPerPage}
-						totalPosts={posts.length}
-						paginate={paginate}
-					/>
-				</div>
-			</div>
-		</>
+		<div className="author-content">
+			<Posts posts={currentPosts} loading={loading} />
+
+			<Pagination
+				postsPerPage={postsPerPage}
+				totalPosts={posts.length}
+				paginate={paginate}
+			/>
+		</div>
 	);
 }
 

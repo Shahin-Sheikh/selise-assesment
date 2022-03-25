@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './FavAuthor.css';
+import Card from 'react-bootstrap/Card';
 function FavAuthor() {
+	const [data, setItems] = useState([]);
+
+	useEffect(() => {
+		const localStorageItems = JSON.parse(localStorage.getItem('items'));
+		console.log(localStorageItems);
+		if (localStorageItems) {
+			setItems(localStorageItems);
+		}
+	}, []);
 	return (
-		<div className="fav-content">
-			<div className="title">
-				<h1>Favourite Author</h1>
+		<>
+			<div className="fav-content">
+				<ul className="card">
+					{data.map((item, index) => {
+						return (
+							<li key={index}>
+								<Card style={{ width: '18rem' }}>
+									<Card.Body>
+										<Card.Title>Name: {item.name}</Card.Title>
+										<Card.Text>Bio: {item.bio}</Card.Text>
+										<Card.Text>Link: {item.link}</Card.Text>
+									</Card.Body>
+								</Card>
+							</li>
+						);
+					})}
+				</ul>
 			</div>
-			<div className="author-info">
-				<div className="author-img">
-					<img
-						src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-						alt="author"
-					/>
-				</div>
-				<div className="author-info-text">
-					<h2> Favrouite Author Name</h2>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Pellentesque\ euismod, urna eu tincidunt consectetur, nisi nisl
-						aliquam eros, eget\
-					</p>
-				</div>
-			</div>
-		</div>
+		</>
 	);
 }
 

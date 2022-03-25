@@ -1,4 +1,6 @@
 import React from 'react';
+import './Pagination.css';
+import { GrCaretNext, GrCaretPrevious } from 'react-icons/gr';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 	const pageNumbers = [];
@@ -8,17 +10,20 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 	}
 
 	return (
-		<nav>
-			<ul className="pagination">
+		<div className="pagination">
+			<ul className="ul-item">
+				<GrCaretPrevious />
+				Page:
 				{pageNumbers.map((number) => (
-					<li key={number} className="page-item">
+					<li key={number} style={{ display: 'inline-block' }}>
 						<a onClick={() => paginate(number)} href="#" className="page-link">
 							{number}
 						</a>
 					</li>
 				))}
+				<GrCaretNext />
 			</ul>
-		</nav>
+		</div>
 	);
 };
 
