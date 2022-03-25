@@ -12,19 +12,13 @@ const Posts = ({ posts, loading }) => {
 	]);
 	const click = (id, name, bio, link) => {
 		//setButtonText(text);
-		setItem(...item, {
-			id: id,
-			name: name,
-			bio: bio,
-			link: link,
-		});
 		const obj = {
 			id: id,
 			name: name,
 			bio: bio,
 			link: link,
 		};
-		localStorage.setItem('items', JSON.stringify(obj));
+		localStorage.setItem('items', JSON.stringify({ ...obj }));
 	};
 
 	if (loading) {
@@ -53,7 +47,6 @@ const Posts = ({ posts, loading }) => {
 					);
 				})}
 			</ul>
-			<button onClick={() => console.log(item)}>Test</button>
 		</div>
 	);
 };
