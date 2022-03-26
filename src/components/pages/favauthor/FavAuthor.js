@@ -23,18 +23,24 @@ function FavAuthor() {
 		<>
 			<div className="fav-content">
 				<ul className="card">
-					{data.map((item, index) => {
-						return (
-							<li key={item.id}>
-								<button onClick={() => handleClick(index)}>Remove Favt</button>
-								<div className="post">
-									<h1>{item.name}</h1>
-									<p>{item.bio}</p>
-									<a href={item.link}>{item.link}</a>
-								</div>
-							</li>
-						);
-					})}
+					{data.length > 0 ? (
+						data.map((item, index) => {
+							return (
+								<li key={item.id}>
+									<button onClick={() => handleClick(index)}>
+										Remove Favt
+									</button>
+									<div className="post">
+										<h1>{item.name}</h1>
+										<p>{item.bio}</p>
+										<a href={item.link}>{item.link}</a>
+									</div>
+								</li>
+							);
+						})
+					) : (
+						<p>No item </p>
+					)}
 				</ul>
 			</div>
 		</>
