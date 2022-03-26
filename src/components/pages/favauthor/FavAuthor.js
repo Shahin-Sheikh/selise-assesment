@@ -11,14 +11,12 @@ function FavAuthor() {
 			setItems([]);
 		}
 	}, []);
-
 	const handleClick = (index) => {
 		data.splice(index, 1);
 		console.log(data);
 		localStorage.setItem('items', JSON.stringify({ arr: data }));
 		window.location.reload(false);
 	};
-
 	return (
 		<>
 			<div className="fav-content">

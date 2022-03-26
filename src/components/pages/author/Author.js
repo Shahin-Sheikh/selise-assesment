@@ -19,14 +19,12 @@ function Author() {
 			setPosts(res.data.results);
 			setLoading(false);
 		};
-
 		fetchPosts();
 	}, []);
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	return (
