@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import Posts from '../../Posts';
+import Posts from '../../listitem/Listitem';
 import Pagination from '../../pagination/Pagination';
 import './Author.css';
 

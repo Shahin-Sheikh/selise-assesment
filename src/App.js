@@ -9,7 +9,8 @@ function App() {
 		<Router>
 			<Navbar />
 			<Routes>
-				<Route path="/authors" exact element={<Author />} />
+				<Route path="/" exact element={<Author />} />
+				<Route path="/authors" element={<Author />} />
 				<Route path="/favauthors" element={<FavAuthor />} />
 			</Routes>
 		</Router>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './FavAuthor.css';
-import Card from 'react-bootstrap/Card';
 function FavAuthor() {
 	const [data, setItems] = useState([]);
 	useEffect(() => {
@@ -28,14 +27,11 @@ function FavAuthor() {
 						return (
 							<li key={item.id}>
 								<button onClick={() => handleClick(index)}>Remove Favt</button>
-								<Card style={{ width: '18rem' }}>
-									<Card.Body>
-										<Card.Title>Name: {index}</Card.Title>
-										<Card.Title>Name: {item.name}</Card.Title>
-										<Card.Text>Bio: {item.bio}</Card.Text>
-										<Card.Text>Link: {item.link}</Card.Text>
-									</Card.Body>
-								</Card>
+								<div className="post">
+									<h1>{item.name}</h1>
+									<p>{item.bio}</p>
+									<a href={item.link}>{item.link}</a>
+								</div>
 							</li>
 						);
 					})}
