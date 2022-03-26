@@ -15,7 +15,7 @@ function FavAuthor() {
 		data.splice(index, 1);
 		console.log(data);
 		localStorage.setItem('items', JSON.stringify({ arr: data }));
-		window.location.reload(false);
+		//window.location.reload(false);
 	};
 	return (
 		<>
