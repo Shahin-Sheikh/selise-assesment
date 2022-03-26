@@ -6,13 +6,19 @@ function FavAuthor() {
 	useEffect(() => {
 		var localStorageItems = JSON.parse(localStorage.getItem('items'));
 		console.log(localStorageItems);
-		localStorageItems.newRow.shift();
 		if (localStorageItems) {
-			setItems(localStorageItems.newRow);
+			setItems(localStorageItems.arr);
 		} else {
 			setItems([]);
 		}
 	}, []);
+
+	const handleClick = (index) => {
+		data.splice(index, 1);
+		console.log(data);
+		localStorage.setItem('items', JSON.stringify({ arr: data }));
+		window.location.reload(false);
+	};
 
 	return (
 		<>
@@ -21,8 +27,10 @@ function FavAuthor() {
 					{data.map((item, index) => {
 						return (
 							<li key={item.id}>
+								<button onClick={() => handleClick(index)}>Remove Favt</button>
 								<Card style={{ width: '18rem' }}>
 									<Card.Body>
+										<Card.Title>Name: {index}</Card.Title>
 										<Card.Title>Name: {item.name}</Card.Title>
 										<Card.Text>Bio: {item.bio}</Card.Text>
 										<Card.Text>Link: {item.link}</Card.Text>
