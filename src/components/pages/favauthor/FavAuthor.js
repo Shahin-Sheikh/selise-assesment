@@ -6,7 +6,7 @@ function FavAuthor() {
 		var localStorageItems = JSON.parse(localStorage.getItem('items'));
 		console.log(localStorageItems);
 		if (localStorageItems) {
-			setItems(localStorageItems.arr);
+			setItems(localStorageItems);
 		} else {
 			setItems([]);
 		}
@@ -14,7 +14,7 @@ function FavAuthor() {
 	const handleClick = (index) => {
 		data.splice(index, 1);
 		console.log(data);
-		localStorage.setItem('items', JSON.stringify({ arr: data }));
+		localStorage.setItem('items', JSON.stringify(data));
 		window.location.reload(false);
 	};
 	return (

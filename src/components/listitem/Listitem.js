@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Listitem = ({ posts }) => {
-	var arr = [];
-	const click = (index) => {
-		arr.push(posts[index]);
-		console.log(arr);
-		localStorage.setItem('items', JSON.stringify({ arr }));
+	const [isFavorite, setIsFavorite] = useState({});
+	const handleClick = (e) => {
+		const id = e.target.id;
+		setIsFavorite((prev) => ({
+			...prev,
+			[id]: !prev[id],
+		}));
+		localStorage.setItem(
+			'items',
+			JSON.stringify(
+				posts.filter(
+					({ _id }) => _id === id || ([_id] in isFavorite && isFavorite[_id])
+				)
+			)
+		);
 	};
+
 	return (
 		<div className="fav-content">
 			<ul className="card">
-				{posts.map((item, index) => {
-					console.log(item._id);
-					return (
-						<li key={item._id}>
-							<button onClick={() => click(index)}>Add Favt</button>
-							<div className="post">
-								<h1>Name: {item.name}</h1>
-								<p>Bio: {item.bio}</p>
-								<a href={item.link}>Link: {item.link}</a>
-							</div>
-						</li>
-					);
-				})}
+				{posts.map((item) => (
+					<li key={item._id}>
+						<button id={item._id} onClick={handleClick}>
+							{isFavorite[item._id] ? 'Remove Fav' : 'Add Fav'}
+						</button>
+						<div className="post">
+							<h4>Name: {item.name}</h4>
+							<p>Bio: {item.bio}</p>
+							<a href={item.link}>Link: {item.link}</a>
+						</div>
+					</li>
+				))}
 			</ul>
 		</div>
 	);
